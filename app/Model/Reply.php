@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use App\User;
 class Reply extends Model
 {
+    protected $guarded = [];
+    
     public function questiion()
     {
     	return $this->belongsTo(Question::class);

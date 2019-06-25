@@ -4,31 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Model\Like;
 use Illuminate\Http\Request;
+use App\Model\Reply;
 
 class LikeController extends Controller
 {
-    public function index()
+    public function likeIt(Reply $reply)
     {
-        //
+        $reply->like()->create([
+            //'user_id' => auth()->id()
+            'user_id' => '1'
+        ]); 
     }
 
-    public function store(Request $request)
+    public function unLikeIt(Reply $reply)
     {
-        //
-    }
-
-    public function show(Like $like)
-    {
-        //
-    }
-
-    public function update(Request $request, Like $like)
-    {
-        //
-    }
-
-    public function destroy(Like $like)
-    {
-        //
+        $reply->like()->where('user_id', '1')->first()->delete();
     }
 }

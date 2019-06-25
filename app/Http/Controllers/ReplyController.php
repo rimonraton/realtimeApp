@@ -10,6 +10,10 @@ use App\Http\Resources\ReplyResource;
 
 class ReplyController extends Controller
 {
+    public function __construct()
+    {
+         $this->middleware('jwt', ['except' => ['index', 'show']]);
+    }
 
     public function index(Question $question)
     {

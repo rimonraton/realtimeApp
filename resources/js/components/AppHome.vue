@@ -10,6 +10,7 @@
 import toolbar from './Toolbar';
 import AppFooter from './AppFooter';
 import Login from './Login/Login';
+import Forum from './forum/forum';
 export default {
 
   name: 'AppHome',

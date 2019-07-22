@@ -3,6 +3,7 @@
     <v-toolbar-side-icon></v-toolbar-side-icon>
     <v-toolbar-title>Maharah</v-toolbar-title>
     <v-spacer></v-spacer>
+    <app-notification v-if="login"></app-notification>
     <div class="hidden-sm-and-down">
       <router-link 
         v-for="item in items"
@@ -16,10 +17,11 @@
 </template>
 
 <script>
+import AppNotification from './AppNotification'
 export default {
 
   name: 'Toolbar',
-
+  components:{AppNotification},
   data () {
     return {
       items: [
@@ -29,7 +31,8 @@ export default {
         { title: 'Login', to: '/login', show:!User.loggedIn() },
         { title: 'Logout', to: '/logout', show:User.loggedIn() },
 
-      ]
+      ],
+      login:User.loggedIn()
 
     }
   },
@@ -37,6 +40,7 @@ export default {
     EventBus.$on('logout', () => {
       User.logout()
     })
+    
   }
 }
 </script>

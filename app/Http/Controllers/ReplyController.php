@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\ReplyResource;
 use App\Notifications\NewReply;
+use App\Events\ReplyDeleteEvent;
 
 class ReplyController extends Controller
 {
@@ -47,6 +48,7 @@ class ReplyController extends Controller
     public function destroy(Question $question, Reply $reply)
     {
         $reply->delete();
+        broadcast(new ReplyDeleteEvent($reply->id))->toOthers();
         return response(null, Response::HTTP_NO_CONTENT);
     }
 }

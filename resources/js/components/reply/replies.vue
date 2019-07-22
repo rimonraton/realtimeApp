@@ -41,6 +41,19 @@ export default {
 	  			this.content.splice(index, 1)
 	  		})
 	  	})
+	  	Echo.private('App.User.' + User.id())
+		    .notification((notification) => {
+		        this.content.unshift(notification.reply)
+		        window.scrollTo(0,0)
+		    });
+		Echo.channel('ReplyDeleteChannel')
+		    .listen('ReplyDeleteEvent', (e) => {
+		    	for (let i = 0; i < this.content.length; i++) {
+		    		if(this.content[i].id == e.id){
+		    			this.content.splice(i, 1)
+		    		}
+		    	}
+		    })
   	}
   }
 }
